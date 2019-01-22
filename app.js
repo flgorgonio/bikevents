@@ -1,5 +1,6 @@
 let express = require('express');
 let app = express();
+const EventoDB = require('./EventoDB')
 let bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -10,12 +11,16 @@ app.get('/', function (req, res) {
 });
 
 app.get('/eventos', function (req, res) {
-    res.send("Lista de todos os eventos do site");
+    EventoDB.getEventos(function (eventos) {
+        res.json(eventos);        
+    });
 });
 
 app.get('/eventos/:tipo', function (req, res) {
     let tipo = req.params.tipo;
-    res.send("Lista de eventos do tipo " + tipo);
+    EventoDB.getEventosByTipo(tipo, function (eventos) {
+        res.json(eventos);
+    });
 });
 
 let server = app.listen(3000, function() {
