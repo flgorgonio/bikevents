@@ -4,8 +4,8 @@ class EventoDB {
     static connect() {
         var connection = mysql.createConnection({
             host: 'localhost',
-            user: 'root',
-            password: 'root',
+            user: 'adminbike',
+            password: 'L@b1c4n_',
             database: 'eventodb'
         });
         connection.connect();
